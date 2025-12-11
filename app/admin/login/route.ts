@@ -5,7 +5,7 @@ export async function GET(request: Request) {
   const session = await auth();
 
   if (!session) {
-    await signIn("github");
+    await signIn("github", { redirectTo: "/admin" });
   }
 
   redirect("/admin");
