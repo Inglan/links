@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormStatus } from "react-dom";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Kbd } from "./ui/kbd";
@@ -9,19 +10,29 @@ export default function CreateLink() {
   return (
     <div className="border p-2 flex flex-col gap-2">
       <div>create</div>
-      <Form />
+      <form className="flex flex-row gap-2" action={() => links.create()}>
+        <FormFields />
+      </form>
     </div>
   );
 }
 
-function Form() {
+function FormFields() {
+  const { pending } = useFormStatus();
+
   return (
-    <form className="flex flex-row gap-2" action={() => links.create()}>
-      <Input placeholder="link" name="link" required autoFocus />
-      <Input placeholder="path" name="path" />
-      <Button variant="outline">
+    <>
+      <Input
+        disabled={pending}
+        placeholder="link"
+        name="link"
+        required
+        autoFocus
+      />
+      <Input disabled={pending} placeholder="path" name="path" />
+      <Button variant="outline" disabled={pending}>
         Create<Kbd>⏎</Kbd>
       </Button>
-    </form>
+    </>
   );
 }
