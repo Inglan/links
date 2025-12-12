@@ -1,5 +1,6 @@
 import { auth, signOut } from "@/auth";
 import CreateLink from "@/components/create-link";
+import LinksList from "@/components/links-list";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +14,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import * as links from "@/lib/links";
 
 export default async function AdminPage() {
   const session = await auth();
@@ -60,7 +62,7 @@ export default async function AdminPage() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <CreateLink />
+          <LinksList links={await links.list()} />
         </div>
       </div>
     );
