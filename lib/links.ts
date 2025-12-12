@@ -22,5 +22,5 @@ export async function list() {
       };
     }),
   );
-  return links.sort((a, b) => a.createdAt - b.createdAt);
+  return links.sort((a, b) => a.createdAt - b.createdAt).reverse();
 }
