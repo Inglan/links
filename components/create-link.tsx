@@ -6,18 +6,23 @@ import { Input } from "./ui/input";
 import { Kbd } from "./ui/kbd";
 import * as links from "@/lib/links";
 
-export default function CreateLink() {
+export default function CreateLink({
+  refetch,
+}: {
+  refetch: () => Promise<void>;
+}) {
   return (
     <div className="border p-2 flex flex-col gap-2">
       <div>create</div>
       <form
         className="flex flex-row gap-2"
-        action={(event) =>
+        action={async (event) => {
           links.create(
             event.get("link")?.toString() || "",
             event.get("path")?.toString() || "",
-          )
-        }
+          );
+          await refetch();
+        }}
       >
         <FormFields />
       </form>
