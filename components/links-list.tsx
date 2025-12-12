@@ -14,7 +14,7 @@ export default function LinksList({ links: serverLinks }: { links: Link[] }) {
 
   return (
     <>
-      <CreateLink refetch={refetch} />
+      <CreateLink refetchAction={refetch} />
       <ul>
         {links.map((link) => (
           <li key={link.path}>

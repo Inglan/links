@@ -7,9 +7,9 @@ import { Kbd } from "./ui/kbd";
 import * as links from "@/lib/links";
 
 export default function CreateLink({
-  refetch,
+  refetchAction,
 }: {
-  refetch: () => Promise<void>;
+  refetchAction: () => Promise<void>;
 }) {
   return (
     <div className="border p-2 flex flex-col gap-2">
@@ -21,7 +21,7 @@ export default function CreateLink({
             event.get("link")?.toString() || "",
             event.get("path")?.toString() || "",
           );
-          refetch();
+          await refetchAction();
         }}
       >
         <FormFields />
