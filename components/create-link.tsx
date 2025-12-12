@@ -30,7 +30,7 @@ export default function CreateLink({
                 formData.get("link")?.toString() || "",
                 formData.get("path")?.toString() || "",
               );
-              refetchAction();
+              await refetchAction();
               (event.target as HTMLFormElement).reset();
             } finally {
               setPending(false);
