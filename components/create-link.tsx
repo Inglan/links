@@ -21,7 +21,7 @@ export default function CreateLink({
             event.get("link")?.toString() || "",
             event.get("path")?.toString() || "",
           );
-          await refetch();
+          refetch();
         }}
       >
         <FormFields />
