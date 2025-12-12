@@ -10,7 +10,15 @@ export default function CreateLink() {
   return (
     <div className="border p-2 flex flex-col gap-2">
       <div>create</div>
-      <form className="flex flex-row gap-2" action={() => links.create()}>
+      <form
+        className="flex flex-row gap-2"
+        action={(event) =>
+          links.create(
+            event.get("link")?.toString() || "",
+            event.get("path")?.toString() || "",
+          )
+        }
+      >
         <FormFields />
       </form>
     </div>
@@ -23,6 +31,7 @@ function FormFields() {
   return (
     <>
       <Input
+        type="url"
         disabled={pending}
         placeholder="link"
         name="link"
