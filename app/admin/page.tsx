@@ -23,7 +23,7 @@ export default async function AdminPage() {
   if (session) {
     return (
       <div className="p-2">
-        <div className="w-full max-w-xl mx-auto flex flex-col gap-2">
+        <div className="w-full max-w-4xl mx-auto flex flex-col gap-2">
           <div className="flex flex-row gap-2">
             <Button size="sm" asChild>
               <Link href="https://github.com/inglan/links/" target="_blank">
@@ -63,7 +63,9 @@ export default async function AdminPage() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <LinksList />
+          <div className="grid md:grid-cols-2 gap-2">
+            <LinksList />
+          </div>
         </div>
       </div>
     );
