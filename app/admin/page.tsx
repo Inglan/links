@@ -1,5 +1,6 @@
 import { auth, signOut } from "@/auth";
 import CreateLink from "@/components/create-link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -29,13 +30,12 @@ export default async function AdminPage() {
             <div className="grow"></div>
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <Image
-                  src={session.user?.image || ""}
-                  alt={session.user?.name || ""}
-                  width={32}
-                  height={32}
-                  className="border"
-                />
+                <Avatar className="rounded-none! border">
+                  <AvatarImage src={session.user?.image || ""} />
+                  <AvatarFallback>
+                    {session.user?.name?.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>
