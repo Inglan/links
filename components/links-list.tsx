@@ -2,8 +2,11 @@
 
 import { Link } from "@/lib/types";
 import CreateLink from "./create-link";
+import { useState } from "react";
 
-export default function LinksList({ links }: { links: Link[] }) {
+export default function LinksList({ links: serverLinks }: { links: Link[] }) {
+  const [links, setLinks] = useState(serverLinks);
+
   return (
     <>
       <CreateLink />
