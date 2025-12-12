@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import * as links from "@/lib/links";
+import { Suspense } from "react";
 
 export default async function AdminPage() {
   const session = await auth();
@@ -62,11 +63,17 @@ export default async function AdminPage() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <LinksList links={await links.list()} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <LinksListContainer />
+          </Suspense>
         </div>
       </div>
     );
   } else {
     redirect("/admin/login");
   }
+}
+
+async function LinksListContainer() {
+  return <LinksList links={await links.list()} />;
 }
