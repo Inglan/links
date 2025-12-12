@@ -38,7 +38,12 @@ export default async function AdminPage() {
                 />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{session.user?.name}</DropdownMenuLabel>
+                <DropdownMenuLabel>
+                  <div>{session.user?.name}</div>
+                  <div className="text-xs text-neutral-400">
+                    {session.user?.email}
+                  </div>
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <form
                   action={async () => {
