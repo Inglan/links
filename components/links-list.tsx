@@ -5,6 +5,7 @@ import CreateLink from "./create-link";
 import { useEffect, useState } from "react";
 import * as linksApi from "@/lib/links";
 import LinkComponent from "./link";
+import { Skeleton } from "./ui/skeleton";
 
 export default function LinksList() {
   const [links, setLinks] = useState<Link[]>([]);
@@ -29,6 +30,13 @@ export default function LinksList() {
       {links.map((link) => (
         <LinkComponent key={link.path} link={link} />
       ))}
+      {loading && (
+        <>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Skeleton key={index} className="h-24" />
+          ))}
+        </>
+      )}
     </>
   );
 }
