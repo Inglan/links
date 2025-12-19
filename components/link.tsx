@@ -29,13 +29,17 @@ export default function LinkComponent({
   return (
     <div className="border flex flex-row p-2 items-center gap-2">
       <div className="flex flex-col grow h-full">
-        <Link
-          href={`/${link.path}`}
-          target="_blank"
-          className="hover:underline wrap-anywhere"
+        <button
+          className="hover:underline wrap-anywhere text-left"
+          onClick={() =>
+            toast.promise(navigator.clipboard.writeText(link.path), {
+              success: "copied",
+              error: "error copying",
+            })
+          }
         >
           <h2 className="text-lg">/{link.path}</h2>
-        </Link>
+        </button>
         <Link href={link.link} target="_blank" className="hover:underline">
           <h3 className="text-sm text-neutral-400 wrap-anywhere">
             {link.link}
