@@ -4,6 +4,18 @@ import { Link as LinkType } from "@/lib/types";
 import { Button } from "./ui/button";
 import { Pencil, Trash } from "lucide-react";
 import Link from "next/link";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import * as links from "@/lib/links";
 
 export default function LinkComponent({ link }: { link: LinkType }) {
   return (
@@ -26,13 +38,32 @@ export default function LinkComponent({ link }: { link: LinkType }) {
         </h3>
       </div>
       <div className="flex flex-col h-full">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => console.log("Delete")}
-        >
-          <Trash />
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => console.log("Delete")}
+            >
+              <Trash />
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>delete link</AlertDialogTitle>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => {
+                  links.deleteLink(link.path);
+                }}
+              >
+                delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
         <Button variant="ghost" size="icon" onClick={() => console.log("Edit")}>
           <Pencil />
         </Button>
