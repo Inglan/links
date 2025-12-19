@@ -51,7 +51,10 @@ export default async function AdminPage() {
                 <form
                   action={async () => {
                     "use server";
-                    await signOut({ redirect: true, redirectTo: "/" });
+                    await signOut({
+                      redirect: true,
+                      redirectTo: "/admin/logged-out",
+                    });
                   }}
                 >
                   <DropdownMenuItem asChild>
