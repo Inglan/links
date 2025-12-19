@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import * as links from "@/lib/links";
 import { toast } from "sonner";
+import { Kbd } from "./ui/kbd";
 
 export default function LinkComponent({
   link,
@@ -59,6 +60,7 @@ export default function LinkComponent({
             <AlertDialogFooter>
               <AlertDialogCancel>cancel</AlertDialogCancel>
               <AlertDialogAction
+                autoFocus
                 onClick={async () => {
                   toast.promise(links.deleteLink(link.path), {
                     loading: "deleting...",
@@ -69,6 +71,7 @@ export default function LinkComponent({
                 }}
               >
                 delete
+                <Kbd>⏎</Kbd>
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
