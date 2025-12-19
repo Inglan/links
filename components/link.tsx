@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function LinkComponent({ link }: { link: LinkType }) {
   return (
-    <div className="border flex flex-row p-2 items-center">
+    <div className="border flex flex-row p-2 items-center gap-2">
       <div className="flex flex-col grow">
         <Link
           href={`/${link.path}`}
