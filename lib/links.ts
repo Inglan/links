@@ -44,3 +44,12 @@ export async function deleteLink(path: string) {
   if (!existing) throw new Error("link does not exist");
   await redis.del(`link:${path}`);
 }
+
+export async function update(currentPath: string, path: string, link: string) {
+  const session = await auth();
+  if (!session) throw new Error("unauthorized");
+  const existing = await redis.get(`link:${currentPath}`);
+  if (!existing) throw new Error("link does not exist");
+  await redis.del(`link:${path}`);
+  await create(link, path);
+}
