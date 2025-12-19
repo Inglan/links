@@ -17,3 +17,5 @@ a minimal link shortener for your domain
 `AUTH_SECRET` - generate this with `openssl rand -hex 32`
 
 `REDIS_URL` - url of a redis instance
+
+3. deploy somewhere like vercel
