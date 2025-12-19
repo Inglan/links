@@ -3,8 +3,6 @@
 import { auth } from "@/auth";
 import { redis } from "./redis";
 
-const linkPattern = /^[A-Za-z0-9]+$/;
-
 export async function create(
   link: string,
   path: string,
@@ -14,7 +12,7 @@ export async function create(
   if (path == "") {
     path = Math.random().toString(36).substring(2, 8);
   }
-  if (!linkPattern.test(path)) return { success: false, error: "invalid path" };
+  path = encodeURIComponent(path);
 
   const existing = await redis.get(`link:${path}`);
   if (existing) return { success: false, error: "path already exists" };
