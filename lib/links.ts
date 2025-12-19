@@ -3,9 +3,16 @@
 import { auth } from "@/auth";
 import { redis } from "./redis";
 
+const linkPattern = /^[A-Za-z0-9]+$/;
+
 export async function create(link: string, path: string) {
   const session = await auth();
   if (!session) throw new Error("unauthorized");
+  if (path == "") {
+    path = Math.random().toString(36).substring(2, 8);
+  }
+  if (!linkPattern.test(path)) throw new Error("invalid path");
+
   const existing = await redis.get(`link:${path}`);
   if (existing) throw new Error("path already exists");
   await redis.set(
