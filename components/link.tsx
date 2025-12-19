@@ -15,9 +15,21 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import * as links from "@/lib/links";
 import { toast } from "sonner";
 import { Kbd } from "./ui/kbd";
+import { useState } from "react";
+import { Input } from "./ui/input";
 
 export default function LinkComponent({
   link,
@@ -26,6 +38,10 @@ export default function LinkComponent({
   link: LinkType;
   refetchAction: () => Promise<void>;
 }) {
+  const [enteredLink, setEnteredLink] = useState("");
+  const [enteredPath, setEnteredPath] = useState("");
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+
   return (
     <div className="border flex flex-row p-2 items-center gap-2">
       <div className="flex flex-col grow h-full">
@@ -85,9 +101,61 @@ export default function LinkComponent({
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-        <Button variant="ghost" size="icon" onClick={() => console.log("Edit")}>
-          <Pencil />
-        </Button>
+        <Dialog
+          onOpenChange={(open) => {
+            setEditDialogOpen(open);
+            if (open) {
+              setEnteredLink(link.link);
+              setEnteredPath(link.path);
+            }
+          }}
+          open={editDialogOpen}
+        >
+          <DialogTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Pencil />
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>edit</DialogTitle>
+              <form
+                className="flex flex-row gap-2"
+                onSubmit={async (event: React.FormEvent<HTMLFormElement>) => {
+                  event.preventDefault();
+                  setEditDialogOpen(false);
+
+                  toast.promise(
+                    links.update(link.path, enteredPath, enteredLink),
+                    {
+                      loading: "updating...",
+                      success: "link updated",
+                      error: (error) => error,
+                      finally: () => refetchAction(),
+                    },
+                  );
+                }}
+              >
+                <Input
+                  type="url"
+                  placeholder="link"
+                  name="link"
+                  value={enteredLink}
+                  onChange={(e) => setEnteredLink(e.target.value)}
+                />
+                <Input
+                  placeholder="path"
+                  name="path"
+                  value={enteredPath}
+                  onChange={(e) => setEnteredPath(e.target.value)}
+                />
+                <Button variant="outline">
+                  save<Kbd>⏎</Kbd>
+                </Button>
+              </form>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
