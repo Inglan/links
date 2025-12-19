@@ -40,11 +40,8 @@ export default function LinkComponent({ link }: { link: LinkType }) {
       <div className="flex flex-col h-full">
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => console.log("Delete")}
-            >
+            <Button variant="ghost" size="icon">
+              <span className="sr-only">Delete</span>
               <Trash />
             </Button>
           </AlertDialogTrigger>
