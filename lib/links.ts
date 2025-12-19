@@ -51,6 +51,8 @@ export async function update(currentPath: string, path: string, link: string) {
   const existing = await redis.get(`link:${currentPath}`);
   if (!existing) throw new Error("link does not exist");
   await redis.del(`link:${path}`);
+  const newExisting = await redis.get(`link:${path}`);
+  if (newExisting) throw new Error("path already exists");
   await redis.set(
     `link:${path}`,
     JSON.stringify({ link, createdAt: JSON.parse(existing).createdAt }),
