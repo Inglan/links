@@ -25,7 +25,7 @@ export default function LinkComponent({ link }: { link: LinkType }) {
           {new Date(link.createdAt).toLocaleString()}
         </h3>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col h-full">
         <Button
           variant="ghost"
           size="icon"
