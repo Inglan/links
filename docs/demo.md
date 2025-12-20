@@ -1,9 +1,5 @@
----
-title: demo
-description: try out links
----
-
-### tldr
+# demo
+## tldr
 ```
 git clone https://github.com/Inglan/links
 cd links
