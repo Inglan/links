@@ -1,6 +1,6 @@
-# demo mode
+## demo
 
-## tldr
+### tldr
 ```
 git clone https://github.com/Inglan/links
 cd links
