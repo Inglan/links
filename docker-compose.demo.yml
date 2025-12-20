@@ -1,0 +1,12 @@
+services:
+  links:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - "DEMO_MODE=true"
+      - "REDIS_URL=redis://redis:6379"
+  redis:
+    image: redis:latest
