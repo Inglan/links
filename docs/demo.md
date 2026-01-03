@@ -1,7 +1,7 @@
 # demo
 ## tldr
 ```
-git clone https://github.com/Inglan/links
+git clone https://github.com/ingoau/links
 cd links
 docker-compose -f docker-compose.demo.yml up
 ```

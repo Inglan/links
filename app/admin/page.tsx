@@ -24,7 +24,7 @@ export default async function AdminPage() {
         <div className="w-full max-w-4xl mx-auto flex flex-col gap-2">
           <div className="flex flex-row gap-2">
             <Button size="sm" asChild>
-              <Link href="https://github.com/inglan/links/" target="_blank">
+              <Link href="https://github.com/ingoau/links/" target="_blank">
                 links
               </Link>
             </Button>
